@@ -1,5 +1,5 @@
 {
-    "name": "isaactorresmichel/wpstarter",
+    "name": "isaactorresmichel/wordpress-starter",
     "description": "A modern WordPress starter repository. Integrates composer packages, namespacing and a better directory structure.",
     "type": "project",
     "license": "MIT",
