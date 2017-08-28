@@ -1,5 +1,5 @@
 {
-    "name": "isaactorresmichel/wordpress-boilerplate",
+    "name": "isaactorresmichel/wp-lets-start",
     "description": "A modern WordPress boilerplate repository. Integrates composer packages, namespacing and a better directory structure.",
     "type": "project",
     "license": "MIT",
