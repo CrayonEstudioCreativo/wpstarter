@@ -1,0 +1,29 @@
+{
+    "name": "crayonestudiocreativo/wpstarter",
+    "description": "A modern WordPress starter repository. Integrates composer packages, namespacing and a better directory structure.",
+    "type": "project",
+    "license": "MIT",
+    "homepage": "http://crayon.com.mx",
+    "authors": [
+        {
+            "name": "Isaac Torres Michel",
+            "email": "isaac@crayon.com.mx"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/CrayonEstudioCreativo/wpstarter/issues"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "composer/installers": "^1.4",
+        "vlucas/phpdotenv": "^2.4",
+        "johnpbloch/wordpress": "^4.8",
+        "roots/wp-password-bcrypt": "^1.0"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^3.0.2"
+    },
+    "extra": {
+        "wordpress-install-dir": "public/app"
+    }
+}
