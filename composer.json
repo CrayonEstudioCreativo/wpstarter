@@ -1,6 +1,6 @@
 {
-    "name": "isaactorresmichel/wordpress-starter",
-    "description": "A modern WordPress starter repository. Integrates composer packages, namespacing and a better directory structure.",
+    "name": "isaactorresmichel/wordpress-boilerplate",
+    "description": "A modern WordPress boilerplate repository. Integrates composer packages, namespacing and a better directory structure.",
     "type": "project",
     "license": "MIT",
     "homepage": "http://crayon.com.mx",
