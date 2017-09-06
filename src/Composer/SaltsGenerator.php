@@ -1,5 +1,5 @@
 <?php
-namespace isaactorresmichel\WordPress\Utils;
+namespace isaactorresmichel\WordPress\Composer;
 
 
 class SaltsGenerator
@@ -23,7 +23,7 @@ class SaltsGenerator
             throw new \Exception("Couldn't generate salts keys from API.");
         }
 
-        $file = getcwd() . '/config/salts.php';
+        $file = getcwd() . '/config/wp-salts.php';
 
         if (file_exists($file)) {
             unlink($file);

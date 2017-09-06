@@ -138,6 +138,7 @@ fabric.properties
 
 ### WordPress ###
 wp-config.php
+wp-salts.php
 public/content/advanced-cache.php
 public/content/backup-db/
 public/content/backups/
@@ -149,6 +150,7 @@ public/content/wp-cache-config.php
 public/content/plugins/hello.php
 public/content/plugins/sqlite-integration
 public/content/db.php
+
 
 /.htaccess
 /license.txt
