@@ -147,6 +147,8 @@ public/content/upgrade/
 public/content/uploads/
 public/content/wp-cache-config.php
 public/content/plugins/hello.php
+public/content/plugins/sqlite-integration
+public/content/db.php
 
 /.htaccess
 /license.txt
