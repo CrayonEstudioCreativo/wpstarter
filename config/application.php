@@ -87,18 +87,18 @@ if (file_exists($env_config)) {
 }
 
 /** Configuration definitions for project */
-
 $definitions = \isaactorresmichel\WordPress\Utils\ServerPathDefinitions::instance($public_dir)
-  ->setWpContentDir( __DIR__ . "/content")
-  ->setWpApplicationDir( __DIR__ . "/app");
+  ->setWpContentDir(__DIR__ . "/content")
+  ->setWpApplicationDir(__DIR__ . "/app");
 
 
 define('WP_DEFAULT_THEME', 'twentyseventeen');
-define( 'WP_HOME', $definitions->getBaseUrl() );
-define( 'WP_SITEURL', "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}" );
-define( 'WP_CONTENT_DIR', $definitions->getWpContentDir() );
-define( 'WP_CONTENT_URL', "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}" );
-
+define('WP_HOME', $definitions->getBaseUrl());
+define('WP_SITEURL',
+  "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}");
+define('WP_CONTENT_DIR', $definitions->getWpContentDir());
+define('WP_CONTENT_URL',
+  "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}");
 
 /**
  * DB settings
