@@ -14,15 +14,22 @@ Env::init();
  * Use Dotenv to set required environment variables and load .env file in root
  */
 $dotenv = new Dotenv\Dotenv($root_dir);
-if (file_exists($root_dir . '/.env')) {
-    $dotenv->load();
-    $dotenv->required([
-      'DB_NAME',
-      'DB_USER',
-      'DB_PASSWORD',
-      'WP_HOME',
-      'WP_SITEURL'
-    ]);
+if (file_exists($root_dir . '/.env') && $dotenv->load()) {
+    if(env('USE_MYSQL')){
+      $dotenv->required([
+        'DB_NAME',
+        'DB_USER',
+        'DB_PASSWORD',
+        'WP_HOME',
+        'WP_SITEURL'
+      ]);
+    } else {
+      $dotenv->required([
+        'DB_FILE',
+        'WP_HOME',
+        'WP_SITEURL'
+      ]);
+    }
 }
 
 /**
@@ -59,12 +66,12 @@ if (USE_MYSQL) {
     define('DB_HOST', env('DB_HOST') ?: 'localhost');
     define('DB_CHARSET', 'utf8mb4');
     define('DB_COLLATE', '');
-    $table_prefix = env('DB_PREFIX') ?: 'wp_';
 } else {
     // Use SQLite
     define('FQDBDIR', WP_CONTENT_DIR . '/database/');
     define('DB_FILE', env('DB_FILE'));
 }
+$table_prefix = env('DB_PREFIX') ?: 'wp_';
 
 
 /**
