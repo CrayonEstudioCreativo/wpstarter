@@ -133,7 +133,6 @@ fabric.properties
 .history
 
 ### WordPress ###
-wp-config.php
 wp-salts.php
 public/app
 public/content/advanced-cache.php
@@ -147,6 +146,8 @@ public/content/wp-cache-config.php
 public/content/plugins/hello.php
 public/content/plugins/sqlite-integration
 public/content/db.php
+public/content/languages
+public/content/database
 
 /.htaccess
 /license.txt
