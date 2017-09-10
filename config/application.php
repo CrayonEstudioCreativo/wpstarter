@@ -18,7 +18,6 @@
  * @package WordPress
  */
 
-
 /** @var string Directory containing all of the site's files */
 $root_dir = dirname(__DIR__);
 
@@ -45,9 +44,7 @@ if (file_exists($root_dir . '/.env') && $dotenv->load()) {
         ]);
     } else {
         $dotenv->required([
-          'DB_FILE',
-          'WP_HOME',
-          'WP_SITEURL'
+          'DB_FILE'
         ]);
     }
 }
@@ -76,7 +73,6 @@ if (env('WP_ENV') === 'development'
     define('WP_DEBUG', false);
 }
 
-
 /**
  * Set up our global environment constant and load its config first
  * Default: production
@@ -88,15 +84,16 @@ if (file_exists($env_config)) {
 
 /** Configuration definitions for project */
 $definitions = \isaactorresmichel\WordPress\Utils\ServerPathDefinitions::instance($public_dir)
-  ->setWpContentDir(__DIR__ . "/content")
-  ->setWpApplicationDir(__DIR__ . "/app");
-
+  ->setWpContentDir(dirname(__DIR__) . "/public/content")
+  ->setWpApplicationDir(dirname(__DIR__) . "/public/app");
 
 define('WP_DEFAULT_THEME', 'twentyseventeen');
-define('WP_HOME', $definitions->getBaseUrl());
+define('WP_HOME', 
+  $definitions->getBaseUrl());
 define('WP_SITEURL',
   "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}");
-define('WP_CONTENT_DIR', $definitions->getWpContentDir());
+define('WP_CONTENT_DIR', 
+  $definitions->getWpContentDir());
 define('WP_CONTENT_URL',
   "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}");
 
@@ -124,7 +121,6 @@ if (USE_MYSQL) {
     /** The Database Collate type. Don't change this if in doubt. */
     define('DB_COLLATE', env('DB_COLLATE'));
 
-
 } else {
     // Use SQLite
     define('FQDBDIR', WP_CONTENT_DIR . '/database/');
@@ -138,7 +134,6 @@ if (USE_MYSQL) {
  * a unique prefix. Only numbers, letters, and underscores please!
  */
 $table_prefix = env('DB_PREFIX') ?: 'wp_';
-
 
 /**#@+
  * Authentication Unique Keys and Salts.
