@@ -36,7 +36,9 @@
   "extra": {
     "wordpress-install-dir": "public/app",
     "installer-paths": {
-      "public/content/plugins/{$name}/": ["type:wordpress-plugin"]
+      "public/content/plugins/{$name}/": [
+        "type:wordpress-plugin"
+      ]
     }
   },
   "autoload": {
@@ -45,6 +47,11 @@
     }
   },
   "scripts": {
+    "post-install-cmd": [
+      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
+      "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+      "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
+    ],
     "post-root-package-install": [
       "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
       "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
