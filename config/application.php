@@ -121,7 +121,7 @@ if (USE_MYSQL) {
 
 } else {
     // Use SQLite
-    define('FQDBDIR', WP_CONTENT_DIR . '/database/');
+    define('DB_DIR', WP_CONTENT_DIR . '/database/');
     define('DB_FILE', env('DB_FILE'));
 }
 
