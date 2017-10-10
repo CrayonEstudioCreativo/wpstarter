@@ -23,7 +23,7 @@
   "require": {
     "composer/installers": "^1.4",
     "vlucas/phpdotenv": "^2.4",
-    "johnpbloch/wordpress": "^4.8",
+    "johnpbloch/wordpress": "^4.8.2",
     "roots/wp-password-bcrypt": "^1.0",
     "oscarotero/env": "^1.1",
     "wpackagist-plugin/sqlite-integration": "^1.8",
