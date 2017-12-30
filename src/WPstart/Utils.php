@@ -6,7 +6,24 @@ class Utils
 {
     public static function getConfigPairs($dir)
     {
+        $pairs = [
+            'SERVER_NAME',
+            'ACCESS_LOG',
+            'ERROR_LOG',
+            'SOCKET_LOCATION'
+        ];
 
+        $return = [];
+        foreach ($pairs as $pair) {
+            $name = "%" . mb_strtolower($pair) . "%";
+            $return[$name] = static::getEnv($pair);
+        }
+
+        return $return;
+    }
+
+    public static function loadEnv($dir)
+    {
         $dotenv = new \Dotenv\Dotenv($dir);
 
         $pairs = [
@@ -19,14 +36,6 @@ class Utils
         if ($dotenv->load()) {
             $dotenv->required($pairs);
         }
-
-        $return = [];
-        foreach ($pairs as $pair) {
-            $name = "%" . mb_strtolower($pair) . "%";
-            $return[$name] = static::getEnv($pair);
-        }
-
-        return $return;
     }
 
     public static function getEnv($name)

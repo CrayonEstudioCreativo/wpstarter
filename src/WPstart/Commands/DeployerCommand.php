@@ -16,6 +16,13 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class DeployerCommand extends DefaultCommand
 {
+
+    public function __construct($name = null)
+    {
+        parent::__construct($name);
+        Utils::loadEnv(getcwd() . "/config");
+    }
+
     protected function configure()
     {
         $this
@@ -27,8 +34,8 @@ class DeployerCommand extends DefaultCommand
                 . "sites in L[A/E]MP environments. Creating the database and config files"
                 . "for your web server.")
             ->setAliases(['d'])
-            ->addOption('apache', 'a', InputOption::VALUE_OPTIONAL, 'Deploy on apache env.', false)
-            ->addOption('nginx', 'e', InputOption::VALUE_OPTIONAL, 'Deploy on nginx env.', false);
+            ->addOption('apache', 'a', InputOption::VALUE_OPTIONAL, 'Apache sites-enabled directory.', false)
+            ->addOption('nginx', 'e', InputOption::VALUE_OPTIONAL, 'NGINX sites-enabled directory.', false);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -77,10 +84,8 @@ class DeployerCommand extends DefaultCommand
             $host = Utils::getEnv('DB_HOST');
 
             // Create connection
+            mysqli_report(MYSQLI_REPORT_STRICT);
             $conn = new \mysqli($host, $username, $password);
-
-            $controlador = new \mysqli_driver();
-            $controlador->report_mode = MYSQLI_REPORT_ALL;
 
             // Create database
             $db = Utils::getEnv('DB_NAME');
@@ -211,8 +216,7 @@ class DeployerCommand extends DefaultCommand
             $this->restartNginx();
             $this->output->writeln([
                 " <info>DONE.</info>",
-                '',
-                "<b>Site deployed to</b> <comment>http://{$this->getSiteName()}</comment>"
+                "<info>Site deployed to</info> <comment>http://{$this->getSiteName()}</comment>"
             ]);
         } catch (\Exception $e) {
             $this->notify("Error: {$e->getMessage()}");

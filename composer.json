@@ -53,14 +53,14 @@
     "post-install-cmd": [
       "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::createEnvFiles",
       "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copyContentFiles",
-      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
-      "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copySqliteDriver",
+      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate"
     ],
     "post-update-cmd": [
       "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::createEnvFiles",
       "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copyContentFiles",
-      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
-      "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copySqliteDriver",
+      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate"
     ]
   }
 }
