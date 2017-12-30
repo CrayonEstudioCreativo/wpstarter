@@ -139,7 +139,8 @@ class DeployerCommand extends DefaultCommand
                 $this->output->writeln("<info>Site {$this->getSiteName()} added to hosts file.</info>");
                 return;
             }
-            $this->output->writeln("<info>Skipped. Site {$this->getSiteName()} was already added on hosts file.</info>");
+            $this->output->writeln("<info>Skipped. Site {$this->getSiteName()} was "
+                . "already added on hosts file.</info>");
         } catch (\Exception $e) {
             $this->notify("Error: {$e->getMessage()}");
             throw $e;
