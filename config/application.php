@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The base configuration for WordPress
  *
@@ -32,17 +33,17 @@ Env::init();
 /**
  * Use Dotenv to set required environment variables and load .env file in root
  */
-$dotenv = new Dotenv\Dotenv($root_dir);
-if (file_exists($root_dir . '/.env') && $dotenv->load()) {
+$dotenv = new Dotenv\Dotenv($root_dir . '/config');
+if ($dotenv->load()) {
     if (env('USE_MYSQL')) {
         $dotenv->required([
-          'DB_NAME',
-          'DB_USER',
-          'DB_PASSWORD'
+            'DB_NAME',
+            'DB_USER',
+            'DB_PASSWORD'
         ]);
     } else {
         $dotenv->required([
-          'DB_FILE'
+            'DB_FILE'
         ]);
     }
 }
@@ -60,10 +61,9 @@ if (file_exists($root_dir . '/.env') && $dotenv->load()) {
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 if (env('WP_ENV') === 'development'
-  || php_sapi_name() == "cli"
-  || $_SERVER['REMOTE_ADDR'] == '127.0.0.1'
-  || $_SERVER['REMOTE_ADDR'] == "::1"
-) {
+    || php_sapi_name() == "cli"
+    || $_SERVER['REMOTE_ADDR'] == '127.0.0.1'
+    || $_SERVER['REMOTE_ADDR'] == "::1") {
     define('WP_ENV', 'development');
     define('WP_DEBUG', true);
 } else {
@@ -75,25 +75,33 @@ if (env('WP_ENV') === 'development'
  * Set up our global environment constant and load its config first
  * Default: production
  */
-$env_config = __DIR__ . '/env/' . WP_ENV . '.php';
+$env_config = __DIR__ . '/config/env/' . WP_ENV . '.php';
 if (file_exists($env_config)) {
     require_once $env_config;
 }
 
 /** Configuration definitions for project */
 $definitions = \isaactorresmichel\WordPress\Utils\ServerPathDefinitions::instance($public_dir)
-  ->setWpContentDir(dirname(__DIR__) . "/public/content")
-  ->setWpApplicationDir(dirname(__DIR__) . "/public/app");
+    ->setWpContentDir(dirname(__DIR__) . "/public/content")
+    ->setWpApplicationDir(dirname(__DIR__) . "/public/app");
 
 define('WP_DEFAULT_THEME', 'twentyseventeen');
-define('WP_HOME', 
-  $definitions->getBaseUrl());
-define('WP_SITEURL',
-  "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}");
-define('WP_CONTENT_DIR', 
-  $definitions->getWpContentDir());
-define('WP_CONTENT_URL',
-  "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}");
+define(
+    'WP_HOME',
+    $definitions->getBaseUrl()
+);
+define(
+    'WP_SITEURL',
+    "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}"
+);
+define(
+    'WP_CONTENT_DIR',
+    $definitions->getWpContentDir()
+);
+define(
+    'WP_CONTENT_URL',
+    "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}"
+);
 
 /**
  * DB settings
@@ -131,7 +139,7 @@ if (USE_MYSQL) {
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix = env('DB_PREFIX') ?: 'wp_';
+$table_prefix = env('DB_PREFIX') ? : 'wp_';
 
 /**#@+
  * Authentication Unique Keys and Salts.
@@ -149,7 +157,7 @@ include_once(__DIR__ . '/wp-salts.php');
  * Custom Settings
  */
 define('AUTOMATIC_UPDATER_DISABLED', true);
-define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
+define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ? : false);
 
 define('FS_METHOD', 'direct');
 define('DISALLOW_FILE_EDIT', true);

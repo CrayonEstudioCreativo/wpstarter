@@ -1,6 +1,7 @@
 {
   "name": "isaactorresmichel/wp-lets-start",
-  "description": "A modern WordPress boilerplate repository. Integrates composer packages, namespacing and a better directory structure.",
+  "description":
+    "A modern WordPress boilerplate repository. Integrates composer packages, namespacing and a better directory structure.",
   "type": "project",
   "license": "MIT",
   "homepage": "http://crayon.com.mx",
@@ -27,18 +28,19 @@
     "roots/wp-password-bcrypt": "^1.0",
     "oscarotero/env": "^1.1",
     "wpackagist-plugin/sqlite-integration": "^1.8",
-    "symfony/filesystem": "^3.3"
+    "symfony/filesystem": "^3.3",
+    "symfony/console": "^3.4",
+    "jolicode/jolinotif": "^1.2"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.0.2",
-    "composer/composer": "^1.5"
+    "composer/composer": "^1.5",
+    "wp-coding-standards/wpcs": "^0.14.0"
   },
   "extra": {
     "wordpress-install-dir": "public/app",
     "installer-paths": {
-      "public/content/plugins/{$name}/": [
-        "type:wordpress-plugin"
-      ]
+      "public/content/plugins/{$name}/": ["type:wordpress-plugin"]
     }
   },
   "autoload": {
@@ -48,18 +50,15 @@
   },
   "scripts": {
     "post-install-cmd": [
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::createEnvFiles",
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copyContentFiles",
       "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
-      "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
-      "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
-    ],
-    "post-root-package-install": [
-      "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
-      "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
       "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
     ],
     "post-update-cmd": [
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::createEnvFiles",
+      "isaactorresmichel\\WordPress\\Composer\\DefaultEnvironmentConfigurator::copyContentFiles",
       "isaactorresmichel\\WordPress\\Composer\\SaltsGenerator::generate",
-      "php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
       "php -r \"file_exists('public/content/db.php') || copy('public/content/plugins/sqlite-integration/db.php', 'public/content/db.php');\""
     ]
   }

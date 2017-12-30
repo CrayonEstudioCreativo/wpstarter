@@ -144,10 +144,15 @@ public/content/upgrade/
 public/content/uploads/
 public/content/wp-cache-config.php
 public/content/plugins/hello.php
+public/content/plugins/akismet
 public/content/plugins/sqlite-integration
 public/content/db.php
 public/content/languages
 public/content/database
+public/content/themes/twenty*
+public/content/**/index.php
+
+config/**/*.conf
 
 /.htaccess
 /license.txt

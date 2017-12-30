@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Console\Application;
+use isaactorresmichel\WordPress\WPstart\Commands\DeployerCommand;
+
+require __DIR__ . '/vendor/autoload.php';
+
+$application = new Application('WPstart', '1.0.0');
+
+// TODO: Import commands.
+$commands = [];
+$commands[] = $deployer = new DeployerCommand();
+
+// Add commands to app.
+$application->addCommands($commands);
+$application
+    ->setDefaultCommand($deployer->getName())
+    ->run();
