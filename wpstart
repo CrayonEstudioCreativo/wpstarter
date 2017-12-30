@@ -3,13 +3,14 @@
 
 use Symfony\Component\Console\Application;
 use isaactorresmichel\WordPress\WPstart\Commands\DeployerCommand;
+use isaactorresmichel\WordPress\WPstart\Commands\ServeCommand;
 
 require __DIR__ . '/vendor/autoload.php';
 
 $application = new Application('WPstart', '1.0.0');
 
 // TODO: Import commands.
-$commands = [];
+$commands = [new ServeCommand()];
 $commands[] = $deployer = new DeployerCommand();
 
 // Add commands to app.

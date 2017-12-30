@@ -3,57 +3,19 @@
 namespace isaactorresmichel\WordPress\WPstart\Commands;
 
 use Joli\JoliNotif\Notification;
-use Joli\JoliNotif\NotifierFactory;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Input\InputOption;
+use isaactorresmichel\WordPress\WPstart\Utils;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\FormatterHelper;
 use Symfony\Component\Console\Formatter\OutputFormatter;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
-use Symfony\Component\Console\Formatter\OutputFormatterStyle;
-use isaactorresmichel\WordPress\WPstart\Utils;
 
-class DeployerCommand extends Command
+class DeployerCommand extends DefaultCommand
 {
-    /**
-     * Input handler.
-     *
-     * @var \Symfony\Component\Console\Input\InputInterface
-     */
-    private $input;
-
-    /**
-     * Output handler.
-     *
-     * @var \Symfony\Component\Console\Output\OutputInterface
-     */
-    private $output;
-
-    /**
-     * Lib Notify Manager
-     *
-     * @var \Joli\JoliNotif\Notifier
-     */
-    private $notifier;
-
-    /**
-     * Filesystem manager
-     * @var \Symfony\Component\Filesystem\Filesystem;
-     */
-    private $fs;
-
-    public function __construct($name = null)
-    {
-        parent::__construct($name);
-
-        $this->notifier = NotifierFactory::create();
-        $this->fs = new Filesystem();
-    }
-
     protected function configure()
     {
         $this
@@ -71,7 +33,7 @@ class DeployerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->setIO($input, $output);
+        parent::execute($input, $output);
 
         if ($this->input->getOption('apache') !== false && $this->input->getOption('nginx') !== false) {
             $message = 'Error: Invalid option, only NGINX or APACHE should be selected when deploying the server.';
@@ -177,35 +139,6 @@ class DeployerCommand extends Command
             $this->notify("Error: {$e->getMessage()}");
             throw $e;
         }
-    }
-
-    private function setIO(InputInterface $input, OutputInterface $output)
-    {
-        $this->input = $input;
-        $this->output = $output;
-
-        $this->output->getFormatter()->setDecorated(true);
-        $this->output->getFormatter()->setStyle(
-            'b',
-            new OutputFormatterStyle('green', 'black', array('bold', 'blink'))
-        );
-    }
-
-    private function notify($body, $icon = null)
-    {
-        if (!$this->notifier->isSupported()) {
-            return false;
-        }
-
-        $notification = (new Notification())
-            ->setBody($body)
-            ->setTitle('WPstart');
-
-        if ($icon && $this->fs->exists($icon)) {
-            $notification->setIcon($_icon);
-        }
-
-        $this->notifier->send($notification);
     }
 
     private function deployApacheWebServer($path)
@@ -316,15 +249,5 @@ class DeployerCommand extends Command
     private function getSiteName()
     {
         return Utils::getEnv('SERVER_NAME');
-    }
-
-    /**
-     * Returns formatter helper.
-     *
-     * @return FormatterHelper
-     */
-    private function getFormatter()
-    {
-        return $this->getHelper('formatter');
     }
 }
