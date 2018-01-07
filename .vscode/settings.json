@@ -1,4 +1,13 @@
 {
 	"phpcs.standard": "PSR2",
-	"php.suggest.basic": false
+	"php.suggest.basic": false,
+	"files.eol": "\n",
+	"emmet.includeLanguages": {
+		"blade": "html"
+	},
+	"[blade]": {
+		"emmet.triggerExpansionOnTab": true,
+		"editor.formatOnSave": false
+	},
+	"prettier.stylelintIntegration": true
 }
