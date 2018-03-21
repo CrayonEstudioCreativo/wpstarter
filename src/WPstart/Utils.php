@@ -43,14 +43,3 @@ class Utils
         return \Env::get($name);
     }
 }
-
-// /**
-//  * Expose global env() function from oscarotero/env
-//  */
-// Env::init();
-
-// /**
-//  * Use Dotenv to set required environment variables and load .env file in root
-//  */
-// $dotenv = new Dotenv\Dotenv($root_dir);
-// if ($dotenv->load()) {

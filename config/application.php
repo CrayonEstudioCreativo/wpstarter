@@ -86,22 +86,10 @@ $definitions = \isaactorresmichel\WordPress\Utils\ServerPathDefinitions::instanc
     ->setWpApplicationDir(dirname(__DIR__) . "/public/app");
 
 define('WP_DEFAULT_THEME', 'twentyseventeen');
-define(
-    'WP_HOME',
-    $definitions->getBaseUrl()
-);
-define(
-    'WP_SITEURL',
-    "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}"
-);
-define(
-    'WP_CONTENT_DIR',
-    $definitions->getWpContentDir()
-);
-define(
-    'WP_CONTENT_URL',
-    "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}"
-);
+define('WP_HOME', $definitions->getBaseUrl());
+define('WP_SITEURL', "{$definitions->getBaseUrl()}{$definitions->getWordpressCodebaseRelativePath()}");
+define('WP_CONTENT_DIR', $definitions->getWpContentDir());
+define('WP_CONTENT_URL', "{$definitions->getBaseUrl()}{$definitions->getWordpressContentRelativePath()}");
 
 /**
  * DB settings
